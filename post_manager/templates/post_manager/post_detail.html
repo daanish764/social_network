@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block body_block %}
+
+<br />
+
+<div class="container">
+        <div class="list-group">
+            <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+                    <div class="d-flex w-100 justify-content-between">
+                      <h5 class="mb-1">{{post}}</h5>
+                      <small>3 days ago</small>
+                    </div>
+                    <p class="mb-1">{{post.text}}</p>
+                    <br />
+                    <small>{{post.created_date}}</small>
+                    <br />
+                    <small>{{post.author}}</small>
+                  </a>
+        </div>
+        <br>
+        {% for comment in comments %}
+        <div class="container">
+                <a type="button" class="close" aria-label="Close" style="float:right" href="{% url 'post:comment_delete' pk=comment.id %}">
+                        <span aria-hidden="true" style="color:red">&times;</span>
+                </a>
+                <div class="list-group">
+                    <div class="row" >
+                    <p><img class="img-responsive user-photo" src="https://ssl.gstatic.com/accounts/ui/avatar_2x.png" style="float:left; margin-right: 10px; margin-left: 5px;" height="42" width="42"  >
+                        <div>{{comment.text}} 
+                            <br><small>{{comment.author}}</small></div>
+                            
+                    </p>
+                    </div><!-- /col-sm-1 -->
+                </div>
+        </div>
+        <br />
+        {% endfor %}
+    </div>
+</div>
+<br /> <br />
+
+<div class="container">
+        <form method="post">
+            {% csrf_token %}
+    
+            <div class="container">
+                {% crispy form %}
+                <button type="submit" class="btn btn-success">Add Comment</button>
+            </div>
+        </form>
+</div>
+
+
+{% endblock %}

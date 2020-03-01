@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block body_block %}
+
+<br />
+
+<div class="container">
+    {% for post in post_list %}
+    <div class="list-group">
+            <a href="{% url 'post:view' pk=post.pk %}" class="list-group-item list-group-item-action flex-column align-items-start">
+              <div class="d-flex w-100 justify-content-between">
+                <h5 class="mb-1">{{post}}</h5>
+                <small>3 days ago</small>
+              </div>
+              <p class="mb-1">{{post.text}}</p>
+              <small>{{post.author}}</small>
+            </a>
+    </div>
+    <br />
+    {% endfor %}
+    <a href="{% url 'post:create' %}"><button type="button" class="btn btn-primary">Create Post</button></a>
+
+
+</div>
+
+{% endblock %}

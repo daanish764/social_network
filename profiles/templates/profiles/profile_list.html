@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block body_block %}
+<br >
+{% for profile in object_list %}
+<div class="container">
+        
+    <h6>{{profile.user}}</h6>
+    <a href="{{profile.get_absolute_url}}"><img src='{{profile.picture.url}}' width="150" height="150"/></a>
+
+</div>
+
+{% endfor %}
+
+{% endblock %}
